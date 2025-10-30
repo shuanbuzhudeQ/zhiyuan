@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>纸怨——厕所</title>
+    <link rel="stylesheet" href="css/main.css">
+    <style>
+        .map-link {
+            display: inline-block;
+            padding: 8px 15px;
+            border: 2px solid #fff;
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+            background-color: rgba(0,0,0,0.5);
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            z-index: 100;
+            border-radius: 4px;
+            transition: all 0.3s;
+        }
+        .map-link:hover {
+            border-color: #ff6b6b;
+            color: #ff6b6b;
+            background-color: rgba(255, 107, 107, 0.1);
+        }
+        
+        .scene-link {
+            display: inline-block;
+            background-color: #ff6b6b;
+            color: #000;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            text-decoration: none;
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            z-index: 100;
+            font-family: "微软雅黑", sans-serif;
+        }
+        .scene-link:hover {
+            background-color: #e55050;
+            color: #000;
+        }
+        
+        .scene-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+        
+        .scene {
+            display: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        
+        #scene1 {
+            display: block;
+        }
+        
+        .scene:target {
+            display: block;
+            z-index: 2;
+        }
+        
+        .scene:not(:target) {
+            display: none;
+            z-index: 1;
+        }
+        
+        .scene .dialog-box {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            right: 20px;
+            z-index: 10;
+        }
+    </style>
+</head>
+<body>
+    <div class="game-container">
+        <a href="map.html" class="map-link">回到地图</a>
+        
+        <div class="scene-area scene-container">
+            <!-- 场景1：洗手台区域 -->
+            <div class="scene" id="scene1">
+                <img src="res/厕所洗手台.jpg" alt="洗手台区域" class="scene-bg">
+                <div class="dialog-box">
+                    <div class="dialog-title">
+                        <span style="display:inline-block;width:20px;height:20px;background-color:#4ecdc4;border-radius:50%;text-align:center;line-height:20px;">你</span>
+                        主控
+                    </div>
+                    <div class="dialog-text">
+                        这是文本
+                    </div>
+                    <div class="dialog-options">
+                        <button onclick="showMessage('这是文本')">这是线索</button>
+                        <button onclick="showMessage('这是文本')">这是线索</button>
+                        <button onclick="showMessage('这是文本')">这是线索</button>
+                    </div>
+                </div>
+                <a href="#scene2" class="scene-link">进入里间</a>
+            </div>
+
+            <!-- 场景2：厕所里间 -->
+            <div class="scene" id="scene2">
+                <img src="res/厕所隔间.jpg" alt="厕所里间" class="scene-bg">
+                <div class="dialog-box">
+                    <div class="dialog-title">
+                        <span style="display:inline-block;width:20px;height:20px;background-color:#ff6b6b;border-radius:50%;text-align:center;line-height:20px;">!</span>
+                        恐怖发现
+                    </div>
+                    <div class="dialog-text">
+                        这是文本
+                    </div>
+                    <div class="dialog-options">
+                        <button onclick="showMessage('这是文本')">这是线索</button>
+                        <button onclick="showMessage('这是文本')">这是线索</button>
+                        <button onclick="showMessage('这是文本')">这是线索</button>
+                    </div>
+                </div>
+                <a href="#scene1" class="scene-link">返回洗手台</a>
+            </div>
+        </div>
+        
+        <div class="live-area">
+            <div class="live-header">
+                <h3 class="live-title">直播间评论区</h3>
+                <span class="viewer-count">在线人数: 19245</span>
+            </div>
+            <div class="comment-area">
+                <div class="comment">
+                    <div class="comment-user">我是网友</div>
+                    <div>这是文本</div>
+                </div>
+                <div class="comment">
+                    <div class="comment-user">我是网友</div>
+                    <div>这是文本</div>
+                </div>
+                <div class="comment">
+                    <div class="comment-user">我是网友</div>
+                    <div>这是文本！</div>
+                </div>
+                <div class="comment">
+                    <div class="comment-user">我是网友</div>
+                    <div>这是文本！</div>
+                </div>
+                <div class="comment">
+                    <div class="comment-user">我是网友</div>
+                    <div>这是文本</div>
+                </div>
+            </div>
+            <div class="comment-input">
+                <input type="text" placeholder="发送你的评论...">
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showMessage(message) {
+            const dialogText = document.querySelector('.scene:target .dialog-text');
+            if (dialogText) {
+                dialogText.textContent = message;
+            }
+        }
+        
+        function scrollCommentsToBottom() {
+            const commentArea = document.querySelector('.comment-area');
+            if (commentArea) {
+                commentArea.scrollTop = commentArea.scrollHeight;
+            }
+        }
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            scrollCommentsToBottom();
+        });
+    </script>
+</body>
+</html>

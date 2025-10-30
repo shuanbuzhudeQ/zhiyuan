@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>纸怨——办公室</title>
+    <link rel="stylesheet" href="css/main.css">
+    <style>
+        .map-link {
+            display: inline-block;
+            padding: 8px 15px;
+            border: 2px solid #fff;
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+            background-color: rgba(0,0,0,0.5);
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            z-index: 100;
+            border-radius: 4px;
+            transition: all 0.3s;
+        }
+        .map-link:hover {
+            border-color: #ff6b6b;
+            color: #ff6b6b;
+            background-color: rgba(255, 107, 107, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="game-container">
+        <a href="map.html" class="map-link">回到地图</a>
+        
+        <div class="scene-area">
+            <img src="res/office.jpg" alt="办公室" class="scene-bg">
+            
+            <div class="dialog-box">
+                <div class="dialog-title">
+                    <span style="display:inline-block;width:20px;height:20px;background-color:#4ecdc4;border-radius:50%;text-align:center;line-height:20px;">你</span>
+                    你
+                </div>
+                <div class="dialog-text">
+                    这是文本
+                </div>
+                <div class="dialog-options">
+                    <button onclick="showMessage('这是文本')">这是线索</button>
+                    <button onclick="showMessage('这是文本')">这是线索</button>
+                    <button onclick="showMessage('这是文本')">这是线索</button>
+                    <button onclick="showMessage('这是文本')">这是线索</button>
+                    <button onclick="showMessage('这是文本')">这是线索</button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="live-area">
+            <div class="live-header">
+                <h3 class="live-title">直播间评论区</h3>
+                <span class="viewer-count">在线人数: 14236</span>
+            </div>
+            <div class="comment-area">
+                <div class="comment">
+                    <div class="comment-user">我是网友</div>
+                    <div>这是文本</div>
+                </div>
+                <div class="comment">
+                    <div class="comment-user">我是网友</div>
+                    <div>这是文本</div>
+                </div>
+                <div class="comment">
+                    <div class="comment-user">我是网友</div>
+                    <div>这是文本</div>
+                </div>
+                <div class="comment">
+                    <div class="comment-user">我是网友</div>
+                    <div>这是文本</div>
+                </div>
+                <div class="comment">
+                    <div class="comment-user">我是网友</div>
+                    <div>这是文本</div>
+                </div>
+                <div class="comment">
+                    <div class="comment-user">我是网友</div>
+                    <div>这是文本！</div>
+                </div>
+            </div>
+            <div class="comment-input">
+                <input type="text" placeholder="发送你的评论...">
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showMessage(message) {
+            const dialogText = document.querySelector('.dialog-text');
+            if (dialogText) {
+                dialogText.textContent = message;
+                
+                // 重要线索触发特殊评论
+                if (message.includes('封口费') || message.includes('心理评估') || message.includes('目击者')) {
+                    addNewComment('真相追寻者', '这个证据太关键了！老师果然知情！');
+                }
+            }
+        }
+        
+        function addNewComment(user, content) {
+            const commentArea = document.querySelector('.comment-area');
+            const newComment = document.createElement('div');
+            newComment.className = 'comment';
+            newComment.innerHTML = `
+                <div class="comment-user">${user}</div>
+                <div class="comment-content">${content}</div>
+            `;
+            commentArea.appendChild(newComment);
+            scrollCommentsToBottom();
+        }
+        
+        function scrollCommentsToBottom() {
+            const commentArea = document.querySelector('.comment-area');
+            if (commentArea) {
+                commentArea.scrollTop = commentArea.scrollHeight;
+            }
+        }
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            scrollCommentsToBottom();
+        });
+    </script>
+</body>
+</html>

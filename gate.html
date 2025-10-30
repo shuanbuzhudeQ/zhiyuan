@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>纸怨——校门</title>
+    <link rel="stylesheet" href="css/main.css">
+    <style>
+        .map-link {
+            display: inline-block;
+            padding: 8px 15px;
+            border: 2px solid #fff;
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+            background-color: rgba(0,0,0,0.5);
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            z-index: 100;
+            border-radius: 4px;
+            transition: all 0.3s;
+        }
+        .map-link:hover {
+            border-color: #ff6b6b;
+            color: #ff6b6b;
+            background-color: rgba(255, 107, 107, 0.1);
+        }
+        
+        /* 场景切换按钮样式 */
+        .scene-link {
+            display: inline-block;
+            background-color: #ff6b6b;
+            color: #000;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            text-decoration: none;
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            z-index: 100;
+            font-family: "微软雅黑", sans-serif;
+        }
+        .scene-link:hover {
+            background-color: #e55050;
+            color: #000;
+        }
+        
+        /* 场景容器 */
+        .scene-container {
+            position: relative;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+        }
+        
+        .scene {
+            display: none;
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        
+        /* 默认显示第一个场景 */
+        #scene1 {
+            display: block;
+        }
+        
+        /* 当场景成为目标时显示，其他隐藏 */
+        .scene:target {
+            display: block;
+            z-index: 2;
+        }
+        
+        .scene:not(:target) {
+            display: none;
+            z-index: 1;
+        }
+        
+        /* 确保每个场景的对话框都在正确位置 */
+        .scene .dialog-box {
+            position: absolute;
+            bottom: 20px;
+            left: 20px;
+            right: 20px;
+            z-index: 10;
+        }
+    </style>
+</head>
+<body>
+    <div class="game-container">
+        <!-- 修改这里：连接到index.html -->
+        <a href="map.html" class="map-link">回到地图</a>
+        
+        <div class="scene-area scene-container">
+            <!-- 场景1：大门外观 -->
+            <div class="scene" id="scene1">
+                <img src="res/buildings.jpg" alt="教学楼大门外观" class="scene-bg">
+                <div class="dialog-box">
+                    <div class="dialog-title">
+                        <span style="display:inline-block;width:20px;height:20px;background-color:#4ecdc4;border-radius:50%;text-align:center;line-height:20px;">你</span>
+                        你
+                    </div>
+                    <div class="dialog-text">
+                        这是文本
+                    </div>
+                    <div class="dialog-options">
+                        <button onclick="showMessage('这是文本')">这是线索</button>
+                        <button onclick="showMessage('这是文本')">这是线索</button>
+                        <button onclick="showMessage('这是文本')">这是线索</button>
+                    </div>
+                </div>
+                <!-- 切换场景超链接 -->
+                <a href="#scene2" class="scene-link">进入校园</a>
+            </div>
+
+            <!-- 场景2：校园内部 -->
+            <div class="scene" id="scene2">
+                <img src="res/校园内部.jpg" alt="校园内部" class="scene-bg">
+                <div class="dialog-box">
+                    <div class="dialog-title">
+                        <span style="display:inline-block;width:20px;height:20px;background-color:#ff6b6b;border-radius:50%;text-align:center;line-height:20px;">!</span>
+                        你的发现
+                    </div>
+                    <div class="dialog-text">
+                        这是文本
+                    </div>
+                    <div class="dialog-options">
+                        <button onclick="showMessage('这是文本')">这是线索</button>
+                        <button onclick="showMessage('这是文本')">这是线索</button>
+                        <button onclick="showMessage('这是文本')">这是线索</button>
+                    </div>
+                </div>
+                <a href="#scene1" class="scene-link">返回大门</a>
+            </div>
+
+            <!-- 场景3：教学楼入口 -->
+            <div class="scene" id="scene3">
+                <img src="res/building-entrance.jpg" alt="教学楼入口" class="scene-bg">
+                <div class="dialog-box">
+                    <div class="dialog-title">
+                        <span style="display:inline-block;width:20px;height:20px;background-color:#4ecdc4;border-radius:50%;text-align:center;line-height:20px;">你</span>
+                        你
+                    </div>
+                    <div class="dialog-text">
+                        这是文本
+                    </div>
+                    <div class="dialog-options">
+                        <button onclick="showMessage('这是文本')">这是线索</button>
+                        <button onclick="showMessage('这是文本')">这是线索</button>
+                        <button onclick="showMessage('这是文本')">这是线索</button>
+                    </div>
+                </div>
+                <a href="#scene2" class="scene-link">返回校园</a>
+            </div>
+        </div>
+        
+        <!-- 右侧直播区 -->
+        <div class="live-area">
+            <div class="live-header">
+                <h3 class="live-title">直播间评论区</h3>
+                <span class="viewer-count">在线人数: 18923</span>
+            </div>
+            <div class="comment-area">
+                <div class="comment">
+                    <div class="comment-user">我是网友</div>
+                    <div>这是文本</div>
+                </div>
+                <div class="comment">
+                    <div class="comment-user">我是网友</div>
+                    <div>这是文本</div>
+                </div>
+                <div class="comment">
+                    <div class="comment-user">我是网友</div>
+                    <div>这是文本</div>
+                </div>
+                <div class="comment">
+                    <div class="comment-user">我是网友</div>
+                    <div>这是文本</div>
+                </div>
+                <div class="comment">
+                    <div class="comment-user">我是网友</div>
+                    <div>这是文本</div>
+                </div>
+                <div class="comment">
+                    <div class="comment-user">我是网友</div>
+                    <div>这是文本</div>
+                </div>
+            </div>
+            <div class="comment-input">
+                <input type="text" placeholder="发送你的评论...">
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function showMessage(message) {
+            const dialogText = document.querySelector('.scene:target .dialog-text');
+            if (dialogText) {
+                dialogText.textContent = message;
+            }
+        }
+        
+        // 自动滚动评论区到底部
+        function scrollCommentsToBottom() {
+            const commentArea = document.querySelector('.comment-area');
+            if (commentArea) {
+                commentArea.scrollTop = commentArea.scrollHeight;
+            }
+        }
+        
+        // 页面加载完成后执行
+        document.addEventListener('DOMContentLoaded', function() {
+            scrollCommentsToBottom();
+            
+            // 为场景链接添加直接跳转功能
+            document.querySelectorAll('.scene-link').forEach(link => {
+                link.addEventListener('click', function(e) {
+                    // 如果链接指向场景3（教学楼入口），检查是否从场景2过来的
+                    if (this.getAttribute('href') === '#scene3') {
+                        if (!window.location.hash === '#scene2') {
+                            e.preventDefault();
+                            showMessage('这是文本');
+                        }
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
